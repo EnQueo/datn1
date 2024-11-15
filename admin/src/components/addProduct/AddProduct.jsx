@@ -8,7 +8,7 @@ const AddProduct = () => {
     const [productDetails,setProductDetails] = useState({
         name:"",
         image:"",
-        category:"shoes",
+        category:"basketballs",
         new_price:"",
         old_price:""
     })
@@ -41,11 +41,11 @@ const AddProduct = () => {
         {
             product.image = responseData.image_url;
             console.log(product);
-            await fetch('https://localhost:4000/addproduct',{
+            await fetch('http://localhost:4000/addproduct',{
                 method:'POST',
                 headers:{
                     Accept:'application/json',
-                    'Content_Type':'application/json'
+                    'Content-Type':'application/json'
                 },
                 body:JSON.stringify(product),
             }).then((resp)=>resp.json()).then((data)=>{
@@ -74,7 +74,7 @@ const AddProduct = () => {
         <p>Product Category</p>
         <select value={productDetails.category} onChange={changeHandler} name="category" className='add-product-selector'>
             <option value="shoes">Shoes</option>
-            <option value="basketball">Basketball</option>
+            <option value="basketballs">Basketballs</option>
             <option value="accessories">Accessories</option>
         </select>
       </div>
@@ -84,7 +84,7 @@ const AddProduct = () => {
         </label>
         <input onChange={imageHandler} type="file" name='image' id='file-input' hidden/>
       </div>
-      <button onClick={()=>{Add_Product}} className='addproduct-btn'>ADD</button>
+      <button onClick={()=>{Add_Product()}} className='addproduct-btn'>ADD</button>
     </div>
   )
 }

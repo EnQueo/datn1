@@ -7,6 +7,7 @@ const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
 const { error } = require("console");
+const bcrypt = require('bcrypt');
 
 app.use(express.json());
 app.use(cors());
@@ -123,6 +124,116 @@ app.get('/allproducts', async (req,res)=>{
     console.log("All Products Fetched")
     res.send(products);
 })
+
+//Schema creating for user model
+
+const Users = mongoose.model('Users',{
+    name:{
+        type:String,
+    },
+    email:{
+        type:String,
+        unique:true,
+    },
+    password:{
+        type:String,
+    },
+    role:{
+        type:String,
+        enum:['user','admin'],
+        default:'user'
+    },
+    cartData:{
+        type:Object,
+    },
+    date:{
+        type:Date,
+        default:Date.now,
+    }
+})
+
+// Creating endpoint for registering the user
+app.post('/signup',async (req,res)=>{
+    try {
+        // Kiểm tra email đã tồn tại
+        const check = await Users.findOne({ email: req.body.email });
+        if (check) {
+          return res.status(400).json({ success: false, errors: "Existing user found with same email address" });
+        }
+    
+        // Tạo dữ liệu giỏ hàng mặc định
+        let cart = {};
+        for (let i = 0; i < 300; i++) {
+          cart[i] = 0;
+        }
+    
+        // Hash mật khẩu
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    
+        // Tạo người dùng mới
+        const user = new Users({
+          name: req.body.username,
+          email: req.body.email,
+          password: hashedPassword, // Lưu mật khẩu đã hash
+          cartData: cart,
+        });
+    
+        await user.save();
+    
+        // Tạo token
+        const data = {
+          user: {
+            id: user.id,
+          },
+        };
+    
+        const token = jwt.sign(data, 'secret_ecom');
+        res.json({ success: true, token });
+      } catch (error) {
+        res.status(500).json({ success: false, errors: "Server error" });
+      }
+})
+
+// Endpoint for user login
+
+app.post('/login',async (req,res)=>{
+    try {
+        const { email, password } = req.body;
+    
+        // Tìm người dùng trong cơ sở dữ liệu
+        const user = await Users.findOne({ email });
+        if (!user) {
+          return res.json({ success: false, errors: "Wrong Email Id" });
+        }
+    
+        // So sánh mật khẩu an toàn
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+          return res.json({ success: false, errors: "Wrong Password" });
+        }
+    
+        // Tạo token và bao gồm vai trò người dùng
+        const data = {
+          user: {
+            id: user.id,
+            role: user.role, // Bao gồm role trong token
+          },
+        };
+    
+        const token = jwt.sign(data, 'secret_ecom', { expiresIn: '1h' });
+    
+        // Trả về token và role
+        res.json({
+          success: true,
+          token,
+          role: user.role, // Trả về role để frontend xử lý
+        });
+      } catch (error) {
+        res.status(500).json({ success: false, errors: "Server error" });
+      }
+})
+
+
 
 app.listen(port,(error)=>{
     if (!error) {
