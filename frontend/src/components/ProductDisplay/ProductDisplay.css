@@ -7,6 +7,7 @@
     display: flex;
     gap: 17px;
 }
+
 .product-display-img-list{
     display: flex;
     flex-direction: column;
@@ -14,7 +15,7 @@
 }
 
 .product-display-img-list img{
-    height: 163px;
+    height: 142px;
 }
 
 .product-display-main-img{
@@ -60,17 +61,43 @@
     color: #ff4141;
 }
 
-.product-display-right-size h1{
-    margin-top: 55px;
-    font-weight: 600;
-    font-size: 20px;
+.product-display-right-description{
+    font-size: 16px;
     color: #656565;
 }
-.product-display-right-sizes{
-    display: flex;
-    margin: 30px 0px;
-    gap: 20px;
+
+.product-display-right-size h1 {
+    font-size: 18px;
+    margin-bottom: 10px;
 }
+
+.product-display-right-sizes {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 10px; 
+    margin-top: 10px;
+}
+
+.size-option {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.size-option:hover {
+    background-color: #f0f0f0;
+    border-color: #999;
+}
+
+.size-option.selected {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+}
+
 .product-display-right-sizes div{
     padding: 18px 24px;
     background: #fbfbfb;
@@ -78,6 +105,16 @@
     border-radius: 3px;
     cursor: pointer;
 }
+
+.product-display-right-sizes div.selected {
+    background-color: #ff4141;  /* Màu nền khi được chọn */
+    color: white;  /* Màu chữ khi được chọn */
+}
+
+.product-display-right-sizes div:hover {
+    background: #ebebeb;
+}
+
 .product-display-right button{
     padding: 20px 40px;
     width: 200px;
@@ -98,6 +135,16 @@
 .product-display-right-category span{
     font-weight: 600;
 }
+
+.product-display-right-brand{
+    margin-top: 5px;
+}
+
+.product-display-right-brand span{
+    font-weight: 600;
+}
+
+/* Responsive Design */
 
 @media(max-width:1280px){
     .product-display{

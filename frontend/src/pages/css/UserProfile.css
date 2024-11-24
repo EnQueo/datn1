@@ -1,0 +1,196 @@
+/* UserProfile.css */
+.user-profile {
+  padding: 30px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 30px;
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+}
+
+.avatar {
+  position: relative;
+  flex-shrink: 0;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.avatar-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ddd;
+  transition: border-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-img:hover {
+  border-color: #007bff;
+}
+
+.avatar-upload {
+  display: none; /* Hide the default file input */
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex-grow: 1;
+}
+
+.user-info input {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.user-info input:focus {
+  border-color: #007bff;
+}
+
+.user-info button {
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.user-info button:hover {
+  background-color: #0056b3;
+}
+
+.change-password-section {
+  margin-top: 40px;
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.change-password-section h3 {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.change-password-section input {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  margin-bottom: 15px;
+}
+
+.change-password-section button {
+  padding: 12px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.change-password-section button:hover {
+  background-color: #218838;
+}
+
+/* Icon styles for pencil and 'X' */
+.edit-icon {
+  cursor: pointer;
+  font-size: 18px;
+  margin-left: 10px;
+  transition: color 0.3s ease;
+}
+
+.edit-icon:hover {
+  color: #007bff;
+}
+
+/* Save change section styles */
+.save-change-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative; /* Thêm position relative */
+}
+
+/* Ensures the name and the edit icon align horizontally */
+.user-info .info {
+  display: flex;
+  align-items: center; /* Align vertically in the middle */
+  gap: 10px; /* Space between name and icon */
+  position: relative;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .avatar-img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .user-info input {
+    width: 100%;
+  }
+
+  .user-info button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-profile {
+    padding: 15px;
+  }
+
+  .profile-section {
+    padding: 15px;
+  }
+
+  .avatar-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .user-info input,
+  .user-info button {
+    font-size: 14px;
+  }
+
+  .change-password-section {
+    padding: 15px;
+  }
+}

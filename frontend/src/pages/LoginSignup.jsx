@@ -18,7 +18,7 @@ const LoginSignup = () => {
   const login = async () => {
     let responseData;
 
-    await fetch('http://localhost:4000/login', {
+    await fetch('http://192.168.55.106:4000/login', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -33,7 +33,7 @@ const LoginSignup = () => {
       localStorage.setItem('auth-token', responseData.token);
   
       if (responseData.role === 'admin') {
-        window.location.replace('http://localhost:5173');
+        window.location.replace('http://192.168.55.106:5173');
       } else {
         window.location.replace('/');
       }
@@ -43,25 +43,28 @@ const LoginSignup = () => {
   }
 
   const signup = async () => {
-    console.log("Sign Up Function Executed",formData)
+    console.log("Sign Up Function Executed", formData);
     let responseData;
-    await fetch('http://localhost:4000/signup',{
-      method:'POST',
-      headers:{
-        Accept:'application/form-data',
-        'Content-Type':'application/json',
+  
+    await fetch('http://192.168.55.106:4000/signup', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
-      body:JSON.stringify(formData),
-    }).then((response)=>response.json()).then((data)=>responseData=data)
-
-    if(responseData.success){
-      localStorage.setItem('auth-token',responseData.token);
-      window.location.replace("/");
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => (responseData = data));
+  
+    if (responseData.success) {
+      alert("Registration successful! Please log in.");
+      window.location.replace("/login");
+    } else {
+      alert(responseData.errors);
     }
-    else{
-      alert(responseData.errors)
-    }
-  }
+  };
+  
 
   return (
     <div className='loginsignup'>

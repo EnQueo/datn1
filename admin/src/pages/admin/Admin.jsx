@@ -4,6 +4,7 @@ import './Admin.css'
 import {Routes,Route} from 'react-router-dom'
 import AddProduct from '../../components/addProduct/AddProduct'
 import ListProduct from '../../components/listProduct/ListProduct.JSX'
+import Order from '../../components/orders/Order'
 
 const Admin = () => {
   return (
@@ -12,6 +13,7 @@ const Admin = () => {
       <Routes>
         <Route path='/addproduct' element={<AddProduct/>}/>
         <Route path='/listproduct' element={<ListProduct/>}/>
+        <Route path='/order' element={<Order/>}/>
       </Routes>
     </div>
   )

@@ -1,21 +1,33 @@
-import React from 'react'
-import './Item.css'
-import { Link } from 'react-router-dom'
-const Item = (props) => {
+import React from 'react';
+import './Item.css';
+import { Link } from 'react-router-dom';
+import defaultImage from '../assets/Frontend_Assets/luka1.jpg'; // Đảm bảo đường dẫn chính xác
+
+const Item = ({ id, name, image, new_price, old_price }) => {
+  // Kiểm tra và lấy ảnh đầu tiên hoặc sử dụng ảnh mặc định nếu không có ảnh
+  const images = image && image.length > 0 ? image[0] : defaultImage;
+
   return (
     <div className='item'>
-        <Link to={`/product/${props.id}`}><img onClick={window.scrollTo(0,0)} src={props.image} alt="" /></Link>
-        <p>{props.name}</p>
-        <div className="item-price">
-          <div className="item-price-new">
-            ${props.new_price}
-          </div>
-          <div className="item-price-old">
-            ${props.old_price}
-          </div>
+      <Link to={`/product/${id}`}>
+        <img 
+          src={images} 
+          alt={name} 
+          onClick={() => window.scrollTo(0, 0)} // Đưa người dùng về đầu trang khi nhấn vào ảnh
+          className="item-image"
+        />
+      </Link>
+      <p>{name}</p>
+      <div className="item-price">
+        <div className="item-price-new">
+          ${new_price}
         </div>
+        <div className="item-price-old">
+          ${old_price}
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Item
+export default Item;

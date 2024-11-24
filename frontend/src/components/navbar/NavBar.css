@@ -86,6 +86,74 @@
     display: none;
 }
 
+/* CSS cho avatar */
+.nav-user-avatar {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+/* Avatar người dùng */
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;  /* Khoảng cách giữa avatar và mũi tên */
+}
+
+/* Mũi tên đi xuống */
+.arrow-down {
+    font-size: 12px;  /* Kích thước mũi tên */
+    margin-left: 4px;  /* Khoảng cách giữa avatar và mũi tên */
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+    position: absolute;
+    top: 45px;  /* Vị trí nằm ngay dưới avatar */
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    z-index: 10;
+    display: none;  /* Mặc định ẩn dropdown */
+    padding: 10px 0;
+    border-radius: 5px;
+}
+
+/* Dropdown menu hiện thị khi visible */
+.dropdown-menu.visible {
+    display: block;
+}
+
+/* Mục trong dropdown */
+.dropdown-item {
+    padding: 10px 20px;
+    text-decoration: none; /* Xóa gạch chân cho các mục trong dropdown */
+    color: #333;
+    font-size: 14px;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect cho mục dropdown */
+.dropdown-item:hover {
+    background-color: #f4f4f4;
+    cursor: pointer;
+}
+
+/* Dropdown item Logout */
+.dropdown-item:last-child {
+    color: red; /* Màu đỏ cho nút Logout */
+}
+
+
+  
+
 @media(max-width:1280px){
     .navbar{
         padding: 12px 50px;

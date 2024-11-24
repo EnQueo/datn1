@@ -1,0 +1,18 @@
+{
+  "name": "datn1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "frontend": "cd frontend && npm start",
+    "backend": "cd backend && node ./index.js",
+    "admin": "cd admin && npm run dev",
+    "all": "npm run frontend && npm run backend && npm run dev"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5"
+  }
+}
