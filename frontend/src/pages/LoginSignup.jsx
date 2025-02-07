@@ -18,7 +18,7 @@ const LoginSignup = () => {
   const login = async () => {
     let responseData;
 
-    await fetch('http://192.168.55.106:4000/login', {
+    await fetch('/login', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -31,12 +31,7 @@ const LoginSignup = () => {
   
     if (responseData.success) {
       localStorage.setItem('auth-token', responseData.token);
-  
-      if (responseData.role === 'admin') {
-        window.location.replace('http://192.168.55.106:5173');
-      } else {
-        window.location.replace('/');
-      }
+      window.location.replace('/')
     } else {
       alert(responseData.errors);
     }
@@ -46,7 +41,7 @@ const LoginSignup = () => {
     console.log("Sign Up Function Executed", formData);
     let responseData;
   
-    await fetch('http://192.168.55.106:4000/signup', {
+    await fetch('/signup', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -77,7 +72,7 @@ const LoginSignup = () => {
         </div>
         <button onClick={()=>{state==="Login"?login():signup()}}>Continue</button>
         {state==="Sign Up"?<p className="loginsignup-login">Already have an account? <span onClick={()=>{setState("Login")}}>Login</span></p>:
-        <p className="loginsignup-login">Create an account? <span onClick={()=>{setState("Sign Up")}}>Register</span></p>}
+        <p className="loginsignup-login">Create an account? <span onClick={()=>{setState("Sign Up")}}>Sign Up</span></p>}
         <div className="loginsignup-agree">
           <input type="checkbox" name='' id='' />
           <p>By continuing, i agree to the terms of use & privacy policy</p>

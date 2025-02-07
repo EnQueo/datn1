@@ -13,11 +13,12 @@ const ShopCategory = (props) => {
   const [priceRange, setPriceRange] = useState([0, 1000]);
   const [sortOrder, setSortOrder] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [visibleProducts, setVisibleProducts] = useState(12); // State để quản lý số lượng sản phẩm hiển thị
+  const [visibleProducts, setVisibleProducts] = useState(12);
 
   const brandOptions = {
-    shoes: ['Nike', 'Adidas', 'Puma', 'Under Armour','Anta'],
+    shoes: ['Nike', 'Adidas', 'Puma', 'Under Armour', 'Anta'],
     basketballs: ['Gerustar', 'Prostar'],
+    accessories: ['Nike', 'Adidas'],
   };
 
   const filteredProducts = all_product
@@ -82,6 +83,7 @@ const ShopCategory = (props) => {
                 name="min"
                 value={priceRange[0]}
                 onChange={handlePriceChange}
+                placeholder="0"
               />
             </label>
             <label>
@@ -91,6 +93,7 @@ const ShopCategory = (props) => {
                 name="max"
                 value={priceRange[1]}
                 onChange={handlePriceChange}
+                placeholder="1000"
               />
             </label>
           </div>
@@ -132,14 +135,14 @@ const ShopCategory = (props) => {
 
         <div className="shopcategory-products">
           {filteredProducts.slice(0, visibleProducts).map((item, i) => {
-            const productImage = item.image || defaultImage;  // Thay đổi từ 'images' thành 'image'
+            const productImage = item.image || defaultImage;
 
             return (
               <Item
                 key={i}
                 id={item.id}
                 name={item.name}
-                image={productImage} // Truyền ảnh đúng từ trường 'image'
+                image={productImage}
                 new_price={item.new_price}
                 old_price={item.old_price}
               />
@@ -152,7 +155,6 @@ const ShopCategory = (props) => {
             Explore More
           </div>
         )}
-
         <Footer />
       </div>
     </div>

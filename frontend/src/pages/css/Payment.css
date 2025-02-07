@@ -1,58 +1,96 @@
 .payment-container {
-    padding: 20px;
-    max-width: 600px;
-    margin: 0 auto;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.promo-section {
+  margin-bottom: 20px;
+}
+
+.promo-section input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.payment-options {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.payment-option {
+  flex: 1;
+  min-width: 100px;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.payment-option.active {
+  border-color: #000;
+  font-weight: bold;
+}
+
+.proceed-button {
+  margin: 20px 0;
+  padding: 10px 20px;
+  background-color: #0070ba;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.proceed-button:hover {
+  background-color: #005ea8;
+}
+
+.cart-summary {
+  margin-top: 30px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .payment-container {
+    padding: 15px;
   }
-  
-  .promo-section {
-    margin-bottom: 20px;
-  }
-  
-  .promo-section input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-  }
-  
+
   .payment-options {
-    display: flex;
-    gap: 10px;
-    margin: 20px 0;
+    flex-direction: column;
+    gap: 15px;
   }
-  
+
   .payment-option {
-    padding: 10px 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
+    width: 100%;
   }
-  
-  .payment-option.active {
-    border-color: #000;
-    font-weight: bold;
-  }
-  
-  .proceed-button {
-    margin: 20px 0;
-    padding: 10px 20px;
-    background-color: #0070ba;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .proceed-button:hover {
-    background-color: #005ea8;
-  }
-  
-  .cart-summary {
-    margin-top: 30px;
-  }
-  
+
   .cart-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
+
+  .cart-item > * {
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .promo-section input {
+    padding: 8px;
+  }
+
+  .proceed-button {
+    padding: 8px 15px;
+  }
+}

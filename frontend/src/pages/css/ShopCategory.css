@@ -54,11 +54,20 @@
     width: 20%;
     float: left;
     padding: 10px;
-    background-color: #f8f8f8;
-    border-right: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     box-sizing: border-box;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
-  
+
+  .shopcategory-sidebar h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #333;
+}
+
   .shopcategory-main {
     width: 80%;
     float: right;
@@ -78,6 +87,9 @@
   
   .shopcategory-sidebar-brand input {
     margin-right: 10px;
+    accent-color: #007bff;
+    width: 16px;
+    height: 16px;
   }
   
   .shopcategory-sidebar-price input {

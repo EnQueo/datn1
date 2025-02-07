@@ -1,19 +1,22 @@
-import React from 'react'
-import './NavBar.css'
-import navlogo from '../../assets/Admin_Assets/logo.png'
-import navProfile from '../../assets/Admin_Assets/nav-profile.svg'
+import React from 'react';
+import './NavBar.css';
+import { Link } from 'react-router-dom';
+import logo from '../../assets/Admin_Assets/logo.png';
 
 const NavBar = () => {
   return (
     <div className='navbar'>
-      <div className="nav-logo">
-        <img src={navlogo} alt="" />
-        <p>EQOShop</p>
+      <div className='nav-logo'>
+        <img src={logo} alt="EQOShop" />
+        <p>EQOShop Admin Panel</p>
       </div>
-
-        <img src={navProfile} className='nav-profile' alt="" />
+      <ul className='nav-menu'>
+        <li>
+          <Link style={{ textDecoration: 'none' }} to='http://localhost:3000'>Home</Link>
+        </li>
+      </ul>
     </div>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

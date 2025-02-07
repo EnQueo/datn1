@@ -10,14 +10,26 @@ const AddProduct = () => {
         category: "basketballs",
         new_price: "",
         old_price: "",
-        size: "",
-        brand: "" 
+        brand: "",
+        sizes: []
     });
+
+    const addSizeQuantity = () => {
+        setProductDetails({
+            ...productDetails,
+            sizes: [...productDetails.sizes, { size: '', quantity: '' }]
+        });
+    };
+
+    const handleSizeQuantityChange = (index, field, value) => {
+        const newSizes = [...productDetails.sizes];
+        newSizes[index][field] = value;
+        setProductDetails({ ...productDetails, sizes: newSizes });
+    };
 
     const imageHandler = (e) => {
         const files = e.target.files; 
         const uploadedImages = [...images];
-
        
         for (let i = 0; i < files.length; i++) {
             uploadedImages.push(files[i]);
@@ -32,53 +44,51 @@ const AddProduct = () => {
 
     const Add_Product = async () => {
         try {
-          // Lưu size dưới dạng chuỗi
-          let product = { ...productDetails };
-          product.size = product.size.trim();
-      
-          // Chuyển tất cả ảnh thành FormData
-          let formData = new FormData();
-          images.forEach((image) => {
-            formData.append('product_images', image, image.name);
-          });
-      
-          // Tải ảnh lên server
-          const uploadResponse = await fetch('http://192.168.55.106:4000/upload', {
-            method: 'POST',
-            headers: { Accept: 'application/json' },
-            body: formData,
-          }).then((resp) => resp.json());
-      
-          if (uploadResponse.success) {
-            // Cập nhật URL ảnh vào product
-            product.image_urls = uploadResponse.image_urls;
-      
-            // Gửi yêu cầu thêm sản phẩm
-            const addResponse = await fetch('http://192.168.55.106:4000/addproduct', {
-              method: 'POST',
-              headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(product),
+            let formData = new FormData();
+            images.forEach((image) => {
+                formData.append('product_images', image, image.name);
+            });
+        
+            const uploadResponse = await fetch('/upload', {
+                method: 'POST',
+                headers: { Accept: 'application/json' },
+                body: formData,
             }).then((resp) => resp.json());
-      
-            if (addResponse.success) {
-              alert('Product Added');
-              setImages([]); // Reset state images
+
+            if (uploadResponse.success) {
+                const product = { ...productDetails, image_urls: uploadResponse.image_urls };
+
+                const addResponse = await fetch('/addproduct', {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(product),
+                }).then((resp) => resp.json());
+
+                if (addResponse.success) {
+                    alert('Product Added');
+                    setImages([]);
+                    setProductDetails({
+                        name: "",
+                        image: "",
+                        category: "basketballs",
+                        new_price: "",
+                        old_price: "",
+                        brand: "",
+                        sizes: []
+                    });
+                } else {
+                    alert('Failed to add product');
+                }
             } else {
-              alert('Failed to add product');
+                alert('Failed to upload images');
             }
-          } else {
-            alert('Failed to upload images');
-          }
         } catch (error) {
-          console.error('Error adding product:', error);
+            console.error('Error adding product:', error);
         }
-      };
-    
-    
-    
+    };
 
     return (
         <div className='add-product'>
@@ -127,19 +137,27 @@ const AddProduct = () => {
             </div>
 
             <div className="addproduct-itemfield">
-                <p>Product Sizes</p>
-                <input
-                    value={productDetails.size}
-                    onChange={changeHandler}
-                    type="text"
-                    name="size"
-                    placeholder="Enter sizes separated by commas (e.g. 8, 8.5, 9)"
-                />
+                <p>Product Sizes and Quantities</p>
+                {productDetails.sizes.map((size, index) => (
+                    <div key={index} className="size-input">
+                        <input
+                            type="text"
+                            value={size.size}
+                            onChange={(e) => handleSizeQuantityChange(index, 'size', e.target.value)}
+                            placeholder="Size (e.g., 8)"
+                        />
+                        <input
+                            type="number"
+                            value={size.quantity}
+                            onChange={(e) => handleSizeQuantityChange(index, 'quantity', e.target.value)}
+                            placeholder="Quantity"
+                        />
+                    </div>
+                ))}
+                <button onClick={addSizeQuantity} className="add-size-btn">Add Size/Quantity</button>
             </div>
 
-
-
-            <button onClick={() => { Add_Product() }} className='addproduct-btn'>ADD</button>
+            <button onClick={Add_Product} className='addproduct-btn'>ADD</button>
         </div>
     );
 };

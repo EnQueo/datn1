@@ -1,58 +1,233 @@
 .payment-container {
-    padding: 20px;
-    max-width: 600px;
-    margin: 0 auto;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+h3 {
+  color: #333;
+  font-size: 1.3rem;
+}
+
+h2 {
+  color: #0070ba;
+  font-size: 1.5rem;
+  margin-top: 30px;
+}
+
+.promo-section {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.promo-section p {
+  font-size: 1rem;
+  color: #333;
+}
+
+.promo-section input {
+  width: 80%;
+  padding: 12px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.check-promo-button {
+  padding: 12px 20px;
+  background-color: #28a745;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 80%;
+  margin-top: 15px;
+}
+
+.check-promo-button:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+.check-promo-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5);
+}
+
+.check-promo-button:active {
+  background-color: #1e7e34;
+  transform: translateY(1px);
+}
+
+.payment-options {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.payment-option {
+  padding: 12px 25px;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.payment-option.active {
+  background-color: #0070ba;
+  color: white;
+  font-weight: bold;
+}
+
+.payment-option:hover {
+  background-color: #d1e7ff;
+}
+
+.proceed-button {
+  padding: 12px 25px;
+  background-color: #0070ba;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.proceed-button:hover {
+  background-color: #005ea8;
+}
+
+.address-section {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.address-section input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.address-section input:focus {
+  border-color: #0070ba;
+  outline: none;
+}
+
+
+.phone-section {
+  margin-top: 30px;
+}
+
+.phone-section h3 {
+  color: #333;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.phone-section input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.cart-summary {
+  margin-top: 30px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.cart-summary hr {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+}
+
+.cart-summary h3 {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.cart-item p {
+  margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+  .payment-container {
+    padding: 15px;
   }
-  
-  .promo-section {
-    margin-bottom: 20px;
-  }
-  
-  .promo-section input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-  }
-  
+
   .payment-options {
-    display: flex;
+    flex-direction: column;
     gap: 10px;
-    margin: 20px 0;
   }
-  
+
   .payment-option {
-    padding: 10px 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
+    width: 100%;
+    padding: 12px;
   }
-  
-  .payment-option.active {
-    border-color: #000;
-    font-weight: bold;
+
+  .check-promo-button {
+    width: 100%;
   }
-  
+
   .proceed-button {
-    margin: 20px 0;
-    padding: 10px 20px;
-    background-color: #0070ba;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    width: 100%;
   }
-  
-  .proceed-button:hover {
-    background-color: #005ea8;
+
+  .promo-section input,
+  .address-section input,
+  .phone-section input {
+    width: 100%;
   }
-  
-  .cart-summary {
-    margin-top: 30px;
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
   }
-  
+
+  h3,
+  h2 {
+    font-size: 1.1rem;
+  }
+
   .cart-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+    flex-direction: column;
+    text-align: center;
   }
-  
+
+  .cart-item p {
+    font-size: 0.9rem;
+  }
+
+  .cart-summary h3 {
+    font-size: 1rem;
+  }
+}

@@ -1,4 +1,3 @@
-/* UserProfile.css */
 .user-profile {
   padding: 30px;
   background-color: #f9f9f9;
@@ -43,7 +42,7 @@
 }
 
 .avatar-upload {
-  display: none; /* Hide the default file input */
+  display: none; 
 }
 
 .user-info {
@@ -85,43 +84,86 @@
   margin-top: 40px;
   background-color: #fff;
   padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .change-password-section h3 {
   margin-bottom: 20px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   color: #333;
+  text-align: center;
 }
 
 .change-password-section input {
-  padding: 12px;
+  padding: 14px;
   font-size: 16px;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 10px;
   outline: none;
-  transition: border-color 0.3s ease;
-  margin-bottom: 15px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.change-password-section input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
 }
 
 .change-password-section button {
-  padding: 12px;
+  padding: 14px;
   background-color: #28a745;
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s ease;
+  font-weight: bold;
+  width: 100%;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .change-password-section button:hover {
   background-color: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Icon styles for pencil and 'X' */
+.change-password-section button:active {
+  background-color: #1e7e34;
+  transform: translateY(0);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.change-password-section .password-strength {
+  font-size: 14px;
+  color: #555;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+
+.change-password-section .password-strength span {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.change-password-section .password-tips {
+  font-size: 14px;
+  color: #777;
+  margin-top: 10px;
+  line-height: 1.5;
+  text-align: center;
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
 .edit-icon {
   cursor: pointer;
   font-size: 18px;
@@ -133,23 +175,20 @@
   color: #007bff;
 }
 
-/* Save change section styles */
 .save-change-section {
   display: flex;
   align-items: center;
   gap: 10px;
-  position: relative; /* Thêm position relative */
+  position: relative; 
 }
 
-/* Ensures the name and the edit icon align horizontally */
 .user-info .info {
   display: flex;
-  align-items: center; /* Align vertically in the middle */
-  gap: 10px; /* Space between name and icon */
+  align-items: center; 
+  gap: 10px;
   position: relative;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .profile-section {
     flex-direction: column;
@@ -168,6 +207,24 @@
 
   .user-info button {
     width: 100%;
+  }
+
+  .change-password-section {
+    padding: 20px;
+  }
+
+  .change-password-section h3 {
+    font-size: 18px;
+  }
+
+  .change-password-section input {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .change-password-section button {
+    padding: 12px;
+    font-size: 14px;
   }
 }
 
@@ -192,5 +249,17 @@
 
   .change-password-section {
     padding: 15px;
+  }
+
+  .change-password-section h3 {
+    font-size: 16px;
+  }
+
+  .change-password-section input {
+    font-size: 13px;
+  }
+
+  .change-password-section button {
+    font-size: 13px;
   }
 }

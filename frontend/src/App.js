@@ -8,6 +8,8 @@ import Cart from './pages/Cart'
 import LoginSignup from './pages/LoginSignup'
 import Payment from './pages/Payment';
 import UserProfile from './pages/UserProfile';
+import Orders from './pages/Orders';
+import Success from './pages/Success';
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
         <Route path='/login' element={<LoginSignup/>}/>
         <Route path='/payment' element={<Payment/>}/>
         <Route path='/user-profile' element={<UserProfile/>}/>
+        <Route path='/orders' element={<Orders/>}/>
+        <Route path='/success' element={<Success/>}/>
       </Routes>
 
       </BrowserRouter>

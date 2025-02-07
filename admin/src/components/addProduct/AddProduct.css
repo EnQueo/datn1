@@ -130,6 +130,47 @@
     font-family: "Poppins", sans-serif;
 }
 
+.add-size-btn {
+    margin-top: 20px;
+    width: 200px;
+    height: 50px;
+    border-radius: 6px;
+    background: #4CAF50;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.add-size-btn:hover {
+    background-color: #45a049;
+}
+
+.add-size-btn:focus {
+    outline: none;
+}
+
+.size-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.size-input input {
+    width: 100px;
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid #c3c3c3;
+    font-size: 14px;
+    padding-left: 10px;
+}
+
+.size-input input:focus {
+    border-color: #6079ff;
+}
+
 @media (max-width: 800px) {
     .add-product {
         width: auto;
@@ -143,5 +184,9 @@
 
     .addproduct-itemfield {
         margin-bottom: 15px;
+    }
+
+    .add-size-btn {
+        width: 100%;
     }
 }

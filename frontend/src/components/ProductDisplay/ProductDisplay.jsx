@@ -8,26 +8,24 @@ const ProductDisplay = (props) => {
     const { product } = props;
     const { addToCart } = useContext(ShopContext);
 
-    const [images, setImages] = useState([...product.image]); // Lưu toàn bộ mảng ảnh
+    const [images, setImages] = useState([...product.image]);
     const [selectedSize, setSelectedSize] = useState(null);
     const [sizes, setSizes] = useState([]);
 
     useEffect(() => {
-        // Tách chuỗi size thành mảng
-        if (product.size) {
-            setSizes(product.size.split(',').map(size => size.trim()));
+        if (product.sizes && Array.isArray(product.sizes)) {
+            setSizes(product.sizes.map(size => size.size));
         }
-    }, [product.size]); 
+    }, [product.sizes]); 
 
     const handleSizeSelect = (size) => {
         setSelectedSize(size);
     };
 
     const handleThumbnailClick = (index) => {
-        // Hoán đổi ảnh lớn và ảnh nhỏ được chọn
         const newImages = [...images];
         [newImages[0], newImages[index]] = [newImages[index], newImages[0]];
-        setImages(newImages); // Cập nhật lại mảng ảnh
+        setImages(newImages);
     };
 
     return (
@@ -50,21 +48,11 @@ const ProductDisplay = (props) => {
             </div>
 
             <div className="product-display-right">
-                <h1>{product.name}</h1>
-                <div className="product-display-right-star">
-                    <img src={star_icon} alt="" />
-                    <img src={star_icon} alt="" />
-                    <img src={star_icon} alt="" />
-                    <img src={star_icon} alt="" />
-                    <img src={star_dull_icon} alt="" />
-                    <p>(122)</p>
-                </div>
+                <div className="product-name">{product.name}</div>
                 <div className="product-display-right-prices">
+                    <div>Price:</div>
                     <div className="product-display-right-price-old">${product.old_price}</div>
                     <div className="product-display-right-price-new">${product.new_price}</div>
-                </div>
-                <div className="product-display-right-description">
-                    This is a Kobe product
                 </div>
                 <div className="product-display-right-size">
                     <h1>Select Size</h1>
@@ -84,6 +72,7 @@ const ProductDisplay = (props) => {
                         )}
                     </div>
                 </div>
+                <br />
                 <button 
                     onClick={() => { 
                         if (selectedSize) {

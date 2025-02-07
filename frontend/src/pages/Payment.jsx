@@ -1,13 +1,12 @@
 import React from 'react'
-import PaymentMethod from '../components/paymentMethod/PaymentMethod'
-import NavBar from '../components/navbar/NavBar'
+import PaymentMethod from '../components/paymentMethod/PaymentMethod';
 
 const Payment = () => {
   return (
     <div>
-        <PaymentMethod/>
+        <PaymentMethod />
     </div>
   )
 }
 
-export default Payment
+export default Payment;

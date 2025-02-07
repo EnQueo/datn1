@@ -4,10 +4,10 @@ import './css/UserProfile.css';
 const UserProfile = () => {
   const [user, setUser] = useState({
     email: '',
-    name: '',  // Chuyển từ 'username' thành 'name'
-    avatar: '', // Avatar mặc định
+    name: '',  
+    avatar: '', 
   });
-  const [newName, setNewName] = useState(''); // Chuyển từ 'newUsername' thành 'newName'
+  const [newName, setNewName] = useState(''); 
   const [newAvatar, setNewAvatar] = useState(null);
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -15,10 +15,9 @@ const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [passwordError, setPasswordError] = useState('');
 
-  // Lấy dữ liệu người dùng khi trang được tải
   useEffect(() => {
     const fetchUserData = async () => {
-      const response = await fetch('http://192.168.55.106:4000/user-profile', {
+      const response = await fetch('/user-profile', {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('auth-token')}`,
@@ -40,7 +39,6 @@ const UserProfile = () => {
     fetchUserData();
   }, []);
   
-  // Xử lý thay đổi avatar
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -48,15 +46,14 @@ const UserProfile = () => {
     }
   };
 
-  // Lưu thay đổi thông tin người dùng
   const handleSaveChanges = async () => {
     const formData = new FormData();
-    formData.append('name', newName);  // Sửa từ 'username' thành 'name'
+    formData.append('name', newName);
     if (newAvatar) {
       formData.append('avatar', newAvatar);
     }
 
-    const response = await fetch('http://192.168.55.106:4000/user-profile', {
+    const response = await fetch('/user-profile', {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('auth-token')}`,
@@ -69,8 +66,8 @@ const UserProfile = () => {
       alert('Changes saved successfully!');
       setUser({
         ...user,
-        name: newName,  // Cập nhật 'name' thay vì 'username'
-        avatar: data.avatar || user.avatar, // Cập nhật avatar nếu có
+        name: newName, 
+        avatar: data.avatar || user.avatar,
       });
       setIsEditing(false);
     } else {
@@ -78,14 +75,13 @@ const UserProfile = () => {
     }
   };
 
-  // Xử lý đổi mật khẩu
   const handleChangePassword = async () => {
     if (newPassword !== confirmPassword) {
       setPasswordError('New password and confirm password do not match');
       return;
     }
 
-    const response = await fetch('http://192.168.55.106:4000/change-password', {
+    const response = await fetch('/change-password', {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('auth-token')}`,
@@ -113,20 +109,6 @@ const UserProfile = () => {
     <div className="user-profile">
       <h1>User Profile</h1>
       <div className="profile-section">
-        <div className="avatar" onClick={() => document.getElementById('avatar-upload').click()}>
-          <img
-            src={user.avatar || 'https://via.placeholder.com/150'}
-            alt="User Avatar"
-            className="avatar-img"
-          />
-          <input
-            id="avatar-upload"
-            type="file"
-            accept="image/*"
-            onChange={handleAvatarChange}
-            className="avatar-upload"
-          />
-        </div>
         <div className="user-info">
           <div className="info">
             <label>Email:</label>
@@ -148,7 +130,7 @@ const UserProfile = () => {
                 className="edit-icon"
                 onClick={() => {
                   if (isEditing) {
-                    setNewName(user.name);  // Sửa từ 'username' thành 'name'
+                    setNewName(user.name);
                     setIsEditing(false);
                   } else {
                     setIsEditing(true);

@@ -3,18 +3,17 @@ import './NavBar.css';
 import nav_dropdown from '../assets/Frontend_Assets/nav_dropdown.png';
 import logo from '../assets/Frontend_Assets/logo.png';
 import cart_icon from '../assets/Frontend_Assets/cart_icon.png';
-import { Link, useLocation } from 'react-router-dom'; // Import useLocation
+import { Link, useLocation } from 'react-router-dom';
 import { ShopContext } from '../../context/ShopContext';
 
 const NavBar = () => {
   const [menu, setMenu] = useState("home");
   const { getTotalCartItems } = useContext(ShopContext);
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false); 
   const menuRef = useRef();
+  const location = useLocation();
 
-  const location = useLocation(); // Lấy thông tin về URL hiện tại
-
-  // Cập nhật trạng thái menu dựa trên URL
   useEffect(() => {
     const currentPath = location.pathname;
 
@@ -25,9 +24,22 @@ const NavBar = () => {
     } else if (currentPath.includes('/accessories')) {
       setMenu("accessories");
     } else {
-      setMenu("home"); // Mặc định là home
+      setMenu("home");
     }
-  }, [location.pathname]); // Chạy lại mỗi khi pathname thay đổi
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('auth-token');
+    if (token) {
+      try {
+        const decodedToken = JSON.parse(atob(token.split('.')[1]));
+        setIsAdmin(decodedToken.user.role === 'admin');
+      } catch (error) {
+        console.error("Invalid token: ", error);
+        setIsAdmin(false);
+      }
+    }
+  }, []);
 
   const dropdown_toggle = () => {
     setDropdownVisible(!dropdownVisible);
@@ -50,19 +62,15 @@ const NavBar = () => {
       <ul ref={menuRef} className='nav-menu'>
         <li onClick={() => { setMenu("home") }}>
           <Link style={{ textDecoration: 'none' }} to='/'>Home</Link>
-          {menu === "home" ? <hr /> : <></>}
         </li>
         <li onClick={() => { setMenu("shoes") }}>
           <Link style={{ textDecoration: 'none' }} to='/shoes'>Shoes</Link>
-          {menu === "shoes" ? <hr /> : <></>}
         </li>
         <li onClick={() => { setMenu("basketballs") }}>
           <Link style={{ textDecoration: 'none' }} to='/basketballs'>Basketballs</Link>
-          {menu === "basketballs" ? <hr /> : <></>}
         </li>
         <li onClick={() => { setMenu("accessories") }}>
           <Link style={{ textDecoration: 'none' }} to='/accessories'>Accessories</Link>
-          {menu === "accessories" ? <hr /> : <></>}
         </li>
       </ul>
       <div className="nav-login-cart">
@@ -78,6 +86,9 @@ const NavBar = () => {
               <div className={`dropdown-menu ${dropdownVisible ? 'visible' : ''}`}>
                 <Link to="/orders" className="dropdown-item">Orders</Link>
                 <Link to="/user-profile" className="dropdown-item">Profile</Link>
+                {isAdmin && (
+                  <Link to="http://localhost:5173" className="dropdown-item">Admin Panel</Link>
+                )}
                 <div className="dropdown-item" onClick={handleLogout}>Logout</div>
               </div>
             )}

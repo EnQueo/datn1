@@ -13,9 +13,10 @@ const getDefaultCart = () => {
 const ShopContextProvider = (props) => {
   const [all_product, setAll_product] = useState([]);
   const [cartItems, setCartItems] = useState(getDefaultCart());
+  const [promoDiscount, setPromoDiscount] = useState(0)
 
   useEffect(() => {
-    fetch('http://192.168.55.106:4000/allproducts')
+    fetch('/allproducts')
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -23,21 +24,39 @@ const ShopContextProvider = (props) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data); // Kiểm tra dữ liệu từ API
+        console.log(data); 
         setAll_product(data);
       })
       .catch((error) => console.error('Error fetching products:', error));
   }, []);
 
   const addToCart = (itemId, size) => {
-    const key = `${itemId}-${size}`; // Tạo khóa duy nhất cho mỗi size
+    const key = `${itemId}-${size}`; 
     setCartItems((prev) => ({ ...prev, [key]: (prev[key] || 0) + 1 }));
   };
 
   const removeFromCart = (itemId, size) => {
     const key = `${itemId}-${size}`;
-    setCartItems((prev) => ({ ...prev, [key]: Math.max((prev[key] || 0) - 1, 0) }));
+    setCartItems((prev) => {
+    const updatedCart = { ...prev };
+    delete updatedCart[key];
+    return updatedCart;
+    });
   };
+
+  const removeFromQuantity = (itemId,size) => {
+    const key = `${itemId}-${size}`;
+    setCartItems((prev) => ({ ...prev, [key]: (prev[key] || 0) - 1}));
+  }
+
+  const addToQuantity = (itemId, size) => {
+    const key = `${itemId}-${size}`;
+    setCartItems((prev) => ({...prev, [key]: (prev[key] || 0) + 1}));
+  };
+  
+  const applyPromoCode = (discount) => {
+    setPromoDiscount(discount)
+  }
 
   const getTotalCartAmount = () => {
     let totalAmount = 0;
@@ -49,6 +68,10 @@ const ShopContextProvider = (props) => {
           totalAmount += itemInfo.new_price * cartItems[key];
         }
       }
+    }
+
+    if (promoDiscount > 0) {
+      totalAmount = totalAmount - (totalAmount * promoDiscount) / 100;
     }
     return totalAmount;
   };
@@ -63,7 +86,7 @@ const ShopContextProvider = (props) => {
     return totalItem;
   };
 
-  const contextValue = { all_product, cartItems, addToCart, removeFromCart, getTotalCartAmount, getTotalCartItems };
+  const contextValue = { all_product, cartItems, addToCart, removeFromCart, getTotalCartAmount, getTotalCartItems, removeFromQuantity,addToQuantity };
   return <ShopContext.Provider value={contextValue}>{props.children}</ShopContext.Provider>;
 };
 

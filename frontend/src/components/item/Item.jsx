@@ -1,10 +1,9 @@
 import React from 'react';
 import './Item.css';
 import { Link } from 'react-router-dom';
-import defaultImage from '../assets/Frontend_Assets/luka1.jpg'; // Đảm bảo đường dẫn chính xác
+import defaultImage from '../assets/Frontend_Assets/luka1.jpg';
 
 const Item = ({ id, name, image, new_price, old_price }) => {
-  // Kiểm tra và lấy ảnh đầu tiên hoặc sử dụng ảnh mặc định nếu không có ảnh
   const images = image && image.length > 0 ? image[0] : defaultImage;
 
   return (
@@ -13,7 +12,7 @@ const Item = ({ id, name, image, new_price, old_price }) => {
         <img 
           src={images} 
           alt={name} 
-          onClick={() => window.scrollTo(0, 0)} // Đưa người dùng về đầu trang khi nhấn vào ảnh
+          onClick={() => window.scrollTo(0, 0)}
           className="item-image"
         />
       </Link>
